@@ -5,10 +5,6 @@ const slider = document.querySelector(".slider");
 let curSlide = 0;
 const maxSlide = slides.length;
 
-// slides.forEach((s, i) => (s.style.transform = `translateX(${105 * i}%)`));
-
-// slider.style.transform = "scale(0.5)";
-// slider.style.overflow = "visible";
 const goToSlide = function (slide) {
   slides.forEach((s, i) => {
     const num = i - slide;
@@ -47,6 +43,7 @@ const nextSlide = function () {
     curSlide++;
   }
   goToSlide(curSlide);
+  activateDot(curSlide);
 };
 const prevSlide = function () {
   if (curSlide === 0) {
@@ -55,6 +52,7 @@ const prevSlide = function () {
     curSlide--;
   }
   goToSlide(curSlide);
+  activateDot(curSlide);
 };
 dotContainer.addEventListener("click", function (e) {
   if (e.target.classList.contains("dots__dot")) {
@@ -82,4 +80,11 @@ const marketPlace = document.querySelector(".marketplace");
 marketPlace.addEventListener("click", function () {
   container.classList.add("hidden");
   productContainer.classList.remove("hidden");
+});
+document.addEventListener("keydown", function (e) {
+  if (e.key === "ArrowLeft") {
+    prevSlide();
+  } else if (e.key === "ArrowRight") {
+    nextSlide();
+  }
 });
